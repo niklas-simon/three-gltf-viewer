@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Raleway', sans-serif;
-  background: #191919;
+  background: #ffffff;
   height: 100%;
   overflow: hidden;
 }
@@ -317,4 +317,25 @@ footer .separator {
     transform: scale(1.0);
     opacity: 0;
   }
+}
+
+#fullscreen {
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  width: 4em;
+  height: 4em;
+  background-repeat: no-repeat;
+  background-size: 3em;
+  background-position: 50% 50%;
+  color: black;
+  background-color: transparent;
+  padding: 1em;
+  border: 0;
+  z-index: 100;
+  border-radius: 50%;
+}
+
+#fullscreen:hover {
+  background-color: #a0a0a0;
 }

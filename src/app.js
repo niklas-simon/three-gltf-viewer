@@ -33,21 +33,36 @@ class App {
 		this.spinnerEl = el.querySelector('.spinner');
 		this.dropEl = el.querySelector('.dropzone');
 		this.inputEl = el.querySelector('#file-input');
+		this.fullscreenEl = el.querySelector("#fullscreen");
+		this.isFullscreen = false;
 		this.validator = new Validator(el);
 
-		this.createDropzone();
-		this.hideSpinner();
+		//this.createDropzone();
+		//this.hideSpinner();
 
 		const options = this.options;
 
-		if (options.kiosk) {
+		/*if (options.kiosk) {
 			const headerEl = document.querySelector('header');
 			headerEl.style.display = 'none';
-		}
+		}*/
 
 		if (options.model) {
 			this.view(options.model, '', new Map());
 		}
+
+		this.fullscreenEl.addEventListener("click", () => this.manageFullscreen());
+		this.fullscreenEl.style.backgroundImage = "url(maximize.svg)";
+
+		document.addEventListener("fullscreenchange", e => {
+			if (document.fullscreenElement) {
+				this.isFullscreen = true;
+				this.fullscreenEl.style.backgroundImage = "url(minimize.svg)";
+			} else {
+				this.isFullscreen = false;
+				this.fullscreenEl.style.backgroundImage = "url(maximize.svg)";
+			}
+		})
 	}
 
 	/**
@@ -148,9 +163,35 @@ class App {
 	hideSpinner() {
 		this.spinnerEl.style.display = 'none';
 	}
-}
 
-document.body.innerHTML += Footer();
+	manageFullscreen() {
+		if (this.isFullscreen) {
+			this.closeFullscreen();
+		} else {
+			this.openFullscreen();
+		}
+	}
+
+	openFullscreen() {
+		if (document.body.requestFullscreen) {
+			document.body.requestFullscreen();
+		} else if (document.body.webkitRequestFullscreen) { /* Safari */
+			document.body.webkitRequestFullscreen();
+		} else if (document.body.msRequestFullscreen) { /* IE11 */
+			document.body.msRequestFullscreen();
+		}
+	}
+
+	closeFullscreen() {
+		if (document.exitFullscreen) {
+		  document.exitFullscreen();
+		} else if (document.webkitExitFullscreen) { /* Safari */
+		  document.webkitExitFullscreen();
+		} else if (document.msExitFullscreen) { /* IE11 */
+		  document.msExitFullscreen();
+		}
+	  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
 	const app = new App(document.body, location);

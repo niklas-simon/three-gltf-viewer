@@ -84,7 +84,7 @@ export class Viewer {
 			ambientColor: '#FFFFFF',
 			directIntensity: 0.8 * Math.PI, // TODO(#116)
 			directColor: '#FFFFFF',
-			bgColor: '#191919',
+			bgColor: '#ffffff',
 
 			pointSize: 1.0,
 		};
@@ -132,8 +132,8 @@ export class Viewer {
 		this.axesHelper = null;
 
 		this.addAxesHelper();
-		this.addGUI();
-		if (options.kiosk) this.gui.close();
+		//this.addGUI();
+		//if (options.kiosk) this.gui.close();
 
 		this.animate = this.animate.bind(this);
 		requestAnimationFrame(this.animate);
@@ -300,7 +300,7 @@ export class Viewer {
 		this.setClips(clips);
 
 		this.updateLights();
-		this.updateGUI();
+		//this.updateGUI();
 		this.updateEnvironment();
 		this.updateDisplay();
 
